@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Emerging Patterns based Clustering</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+    <body style="background-color: white;">
+    <header style="background-color:whitesmoke;height:100px;width:1350px">
+        <h1 align="center" style="font-family: Calibri">Emerging Patterns Based Clustering</h1>
+        </header>
+    <hr />
+    <form  id="form1" runat="server">
+    <div >
+
+        <asp:ContentPlaceHolder  id="ContentPlaceHolder1" runat="server"/>
+                   
+    </div>
+    </form>
+    <hr />
+    <footer  style="background-color:whitesmoke;height:20px;width:1350px;align-content:stretch ">
+        <h5 align="center" style="font-family:Calibri; fit-position:slice"> GITAM University</h5>
+    </footer> 
+</body>
+</html>
