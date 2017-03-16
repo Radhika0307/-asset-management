@@ -12,172 +12,50 @@ public partial class clusterpage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-       
-    }
-
-    protected void grdview_search()
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
+        if (!this.IsPostBack)
         {
+            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            string query = "select user_id,ipaddress,url,count(url) from Main where ipaddress like '%123%' group by url,ipaddress,user_id;";
+            query += "select user_id,ipaddress,url,count(url) from Main where ipaddress like '%199%' group by url,ipaddress,user_id;";
+            query += "select user_id,ipaddress,url,count(url) from Main where ipaddress like '%198%' group by url,ipaddress,user_id";
+            using (SqlConnection con = new SqlConnection(connStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(ds);
+                            gridView2.DataSource = ds.Tables[0];
+                            gridView2.DataBind();
+                            gridView3.DataSource = ds.Tables[1];
+                            gridView3.DataBind();
+                            gridView4.DataSource = ds.Tables[2];
+                            gridView4.DataBind();
 
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%199%' group by url,ipaddress";
+                        }
 
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            gridView2.DataSource = ds;
-            gridView2.DataBind();
-            con.Close();
+                    }
+                }
+            }
         }
     }
     
-    protected void lnk1_Click(object sender, EventArgs e)
+    protected void grv2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
+        if (e.Row.RowType == DataControlRowType.Header)
         {
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%199%' group by url,ipaddress";
-            SqlCommand com = new SqlCommand(query, con);
-
-            SqlDataReader dr;
-            dr = com.ExecuteReader();
-            if (dr.HasRows)
-            {
-                dr.Read();
-
-                grdview_search();
-                gridView3.Visible = true;
-
-                
-                
-
-            }
-            
+            e.Row.Cells[0].Text = "User ID";
+            e.Row.Cells[1].Text = "IP Address";
+            e.Row.Cells[2].Text = "URL";
+            e.Row.Cells[3].Text = "Support Count";
         }
     }
-    protected void grdview1_search()
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
 
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%198%' group by url,ipaddress";
-
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            gridView2.DataSource = ds;
-            gridView2.DataBind();
-            con.Close();
-        }
-    }
-    protected void lnk2_Click(object sender, EventArgs e)
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%198%' group by url,ipaddress";
-            SqlCommand com = new SqlCommand(query, con);
-
-            SqlDataReader dr;
-            dr = com.ExecuteReader();
-            if (dr.HasRows)
-            {
-                dr.Read();
-
-                grdview1_search();
-                gridView4.Visible = true;
-
-
-                
-
-            }
-        }
-    }
-    protected void grdview2_search()
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
-
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%198%' group by url,ipaddress";
-
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            gridView2.DataSource = ds;
-            gridView2.DataBind();
-            con.Close();
-        }
-    }
-    protected void lnk3_Click(object sender, EventArgs e)
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%123%' group by url,ipaddress";
-            SqlCommand com = new SqlCommand(query, con);
-
-            SqlDataReader dr;
-            dr = com.ExecuteReader();
-            if (dr.HasRows)
-            {
-                dr.Read();
-
-                grdview2_search();
-                gridView2.Visible = true;
-
-
-                
-
-            }
-           
-        }
-    }
-    protected void grdview3_search()
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
-
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%123%'or ipaddress like '%199%'or ipaddress like '%198%'group by url,ipaddress";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            gridView2.DataSource = ds;
-            gridView2.DataBind();
-            con.Close();
-        }
-    }
-   
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(connStr))
-        {
-            con.Open();
-            string query = "select ipaddress,url,count(url) from Main where ipaddress like '%123%'or ipaddress like '%199%'or ipaddress like '%198%'group by url,ipaddress";
-            SqlCommand com = new SqlCommand(query, con);
-
-            SqlDataReader dr;
-            dr = com.ExecuteReader();
-            if (dr.HasRows)
-            {
-                dr.Read();
-
-                grdview3_search();
-                gridView2.Visible = true;
-            }
-
-        }
-    }
+    
 }
+    
+  
