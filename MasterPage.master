@@ -9,8 +9,11 @@
     </asp:ContentPlaceHolder>
 </head>
     <body style="background-color: white;">
-    <header style="background-color:whitesmoke;height:100px;width:1350px">
-        <h1 align="center" style="font-family: Calibri">Emerging Patterns Based Clustering</h1>
+    <header style="background-color:whitesmoke;height:200px;width:100%">
+        <div class="content">
+        <img src="logo-gitam-final.jpg" alt="logo" runat="server" style="height:164px; width:200px;" />
+            <h1 draggable="true" align="center" style="margin-top: 0px">Emerging Patterns based Clustering</h1>
+            &nbsp;</div>
         </header>
     <hr />
     <form  id="form1" runat="server">
@@ -24,5 +27,18 @@
     <footer  style="background-color:whitesmoke;height:20px;width:1350px;align-content:stretch ">
         <h5 align="center" style="font-family:Calibri; fit-position:slice"> GITAM University</h5>
     </footer> 
+        <style>
+            .content {
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+               
+            }
+
+.content img {
+    margin-right: 15px;
+    float: left;
+}
+</style>
 </body>
 </html>

@@ -42,8 +42,36 @@ public partial class clusterpage : System.Web.UI.Page
                 }
             }
         }
+        Button btnGraph = new Button();
+        btnGraph.ID = "btnStart";
+        btnGraph.Text = "Click to see graph";
+        btnGraph.OnClientClick = "return myfunction()";
+        btnGraph.Click += new EventHandler(btnGraph_Click);
+        if (gridView2 != null && gridView2.FooterRow != null)
+        {
+            gridView2.FooterRow.Cells[0].Controls.Add(btnGraph);
+        }
+        Button btnGraph1 = new Button();
+        btnGraph1.ID = "btnStart1";
+        btnGraph1.Text = "Click to see graph";
+        btnGraph1.OnClientClick = "return myfunction1()";
+        btnGraph1.Click += new EventHandler(btnGraph1_Click);
+        if (gridView3 != null && gridView3.FooterRow != null)
+        {
+            gridView3.FooterRow.Cells[0].Controls.Add(btnGraph1);
+        }
+        Button btnGraph2 = new Button();
+        btnGraph2.ID = "btnStart2";
+        btnGraph2.Text = "Click to see graph";
+        btnGraph2.OnClientClick = "return myfunction2()";
+        btnGraph2.Click += new EventHandler(btnGraph2_Click);
+        if (gridView4 != null && gridView4.FooterRow != null)
+        {
+            gridView4.FooterRow.Cells[0].Controls.Add(btnGraph2);
+        }
+
     }
-    
+
     protected void grv2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.Header)
@@ -52,10 +80,27 @@ public partial class clusterpage : System.Web.UI.Page
             e.Row.Cells[1].Text = "IP Address";
             e.Row.Cells[2].Text = "URL";
             e.Row.Cells[3].Text = "Support Count";
+            
         }
     }
+    protected void btnGraph_Click(object sender, EventArgs e)
+    {
+     
+    }
+    protected void btnGraph1_Click(object sender, EventArgs e)
+    {
 
-    
+    }
+    protected void btnGraph2_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void Chart1_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Visual.aspx");
+    }
 }
-    
-  

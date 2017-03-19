@@ -5,8 +5,7 @@
     <center>
         <p>welcome</p>
         <p>
-                    <asp:Label ID="lbView" runat="server" Text="click this button to cluster"></asp:Label>
-                    </p>
+                    click here to view graph</p>
         <p>
                     <asp:Button ID="btnView" runat="server" Text="click here" OnClick="btnView_Click" />
                 </p>
